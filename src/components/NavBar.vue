@@ -4,20 +4,24 @@
         <div className="logo-container">
           <img :src="logo" alt="logo" class="logo" />
         </div>
-        <!-- <div className="navBar-links">
-          <Link>Home</Link>
-        </div> -->
-       <!-- <DropdownMenu/> -->
+        <div className="navBar-links">
+         <a href="/">Home</a>
+        </div>
+       <DropdownMenu/>
       </div>
     </div>
 </template>
 
 <script>
+    import DropdownMenu from './DropdownMenu.vue';
     export default {
         data() {
             return {
                 logo: require('../assets/logo.png'),
             };
+        },
+        components: {
+            DropdownMenu,
         },
     };
 </script>

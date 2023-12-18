@@ -1,24 +1,53 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import Login from '../views/Login.vue'
+import NavBar from '../components/NavBar.vue'
+import Footer from '../components/Footer.vue'
+import MovieDetail from '../views/MovieDetail.vue'
+import BetalingGeslaagd from '../views/BetalingGeslaagd.vue'
+import Profiel from '../views/Profiel.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
-    children: [
-      {
-        path: 'about',
-        name: 'about',
-        component: AboutView
-      }
-    ]
+    components: {
+      default: HomeView,
+      navbar: NavBar,
+      footer: Footer,
+    }, 
   },
   {
-    path: '/about',
-    name: 'about',
-    component: AboutView
+    path: '/movieDetail/:title',
+    name: 'movieDetail',
+    components: {
+      default: MovieDetail,
+      navbar: NavBar,
+      footer: Footer,
+    },
+  },
+  {
+    path: '/movieDetail/:title/betalingGeslaagd/:id',
+    name: 'betalingGeslaagd',
+    components: {
+      default: BetalingGeslaagd,
+      navbar: NavBar,
+      footer: Footer,
+    },
+  },
+  {
+    path: '/profiel',
+    name: 'profiel',
+    components: {
+      default: Profiel,
+      navbar: NavBar,
+      footer: Footer,
+    },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 

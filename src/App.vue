@@ -1,11 +1,9 @@
 <template>
-  <NavBar />
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <!-- <router-link to="/about">About</router-link> -->
-  </nav>
-  <router-view/>
-<Footer />
+  <div>
+    <router-view name="navbar" />
+    <router-view />
+    <router-view name="footer" />
+  </div>
 </template>
 
 <script>
@@ -15,12 +13,12 @@ import NavBar from './components/NavBar.vue';
 export default {
   components: {
     Footer,
-    NavBar
+    NavBar,
 },
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
 body{
   /* background: white; */
   background-color: #cfcfcf;
