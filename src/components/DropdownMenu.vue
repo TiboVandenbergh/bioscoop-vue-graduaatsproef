@@ -21,6 +21,7 @@
   
   <script>
   import Notifications from './Notification.js';
+  import { logoutUser } from '@/api';
   export default {
     computed: {
     isLoggedIn() {
@@ -40,14 +41,27 @@
       handleLogin() {
         this.$router.push('/login');
       },
-      handleLogout() {
+      async handleLogout() {
         const confirmatie = window.confirm("Ben je zeker dat je wilt uitloggen?");
         if (!confirmatie) {
           return;
         }
-        this.$store.commit('setLoggedIn', false);
-        Notifications({ tekst: "Succesvol uitgelogd", type: "success" });
-        this.$router.push('/');
+
+        try {
+        const response = await logoutUser();
+
+        if (response.status === 200) {
+            Notifications({ tekst: "Succesvol uitgelogd", type: "success" });
+            this.$store.commit('setLoggedIn', false);
+            this.$router.push('/');
+
+        }else{
+            Notifications({ tekst: "Uitloggen mislukt", type: "error" });
+        }
+ 
+      } catch (error) {
+        console.error("Fout bij uitloggen:", error);
+      }
       },
       toggleDropdown() {
         this.showDropdown = !this.showDropdown;

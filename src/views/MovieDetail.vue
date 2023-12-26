@@ -24,7 +24,7 @@
             <p v-for="(time, index) in timeArr" :key="index" @click="handleCheck(index)" :class="{ checked: index === checkedTime }">{{ time }}</p>
           </div>
           <div class="trailer">
-            <!-- <Trailer v-if="isTrailerVisible" :trailerID="selectedMovie.trailerId" /> -->
+            <Trailer v-if="isTrailerVisible" :trailerID="selectedMovie.trailerId" />
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
   </template>
   
 <script>
-// import Trailer from '../component/Trailer';
+import Trailer from '@/components/Trailer';
 import Notifications from '@/components/Notification.js';
 import { useRouter   } from 'vue-router';
 import { createTicket, getMovies } from '../api';
@@ -55,7 +55,7 @@ import BackButton from '../components/BackButton.vue';
 
 export default {
   components: {
-    // Trailer,
+    Trailer,
     BackButton
   },
   data() {
@@ -104,24 +104,6 @@ export default {
     castMembers() {
       return this.selectedMovie.cast ? this.selectedMovie.cast.slice(0, 6) : [];
     },
-    // getSeats() {
-    //   const zitPlaatsen = [];
-    //   const currentSelectedSeats = this.selectedSeatsByTime[this.checkedTime];
-    //   for (let i = 1; i <= 60; i++) {
-    //     const isSelected = currentSelectedSeats.includes(i);
-    //     zitPlaatsen.push(
-    //       <div
-    //         :key="i"
-    //         class="grid-item"
-    //         :class="{ selected: isSelected }"
-    //         @click="handleSeatClick(i)"
-    //       >
-    //         {{ i }}
-    //       </div>
-    //     );
-    //   }
-    //   return zitPlaatsen;
-    // },
     handleSeatClick(seat) {
       const currentSelectedSeats = this.selectedSeatsByTime[this.checkedTime];
       const isSeatSelected = currentSelectedSeats.includes(seat);
@@ -149,10 +131,11 @@ export default {
       if (!confirm) {
         return;
       }
-      Notifications({ tekst: 'Betaling Geslaagd!', type: 'success' });
+    
       const data = this.getData();
       createTicket(data)
         .then(response => {
+          Notifications({ tekst: 'Betaling Geslaagd!', type: 'success' });
           const ticketId = response.data.id;
           this.$router.push({
             name: 'betalingGeslaagd',
@@ -161,6 +144,7 @@ export default {
           window.scrollTo(0, 0);
         })
         .catch(error => {
+          Notifications({ tekst: "Betaling mislukt - niet ingelogd", type: "error" })
           console.error('Error bij data doorsturen', error);
         });
     },

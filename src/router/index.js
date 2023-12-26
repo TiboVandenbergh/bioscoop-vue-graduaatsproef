@@ -6,6 +6,7 @@ import Footer from '../components/Footer.vue'
 import MovieDetail from '../views/MovieDetail.vue'
 import BetalingGeslaagd from '../views/BetalingGeslaagd.vue'
 import Profiel from '../views/Profiel.vue'
+import { verifyUser } from '@/api'
 
 const routes = [
   {
