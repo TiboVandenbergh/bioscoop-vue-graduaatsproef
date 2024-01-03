@@ -9,7 +9,6 @@
   </template>
   
   <script>
-  import { ref, computed, onMounted } from 'vue';
   import InformatieTicket from '@/components/InformatieTicket';
   
   export default {
