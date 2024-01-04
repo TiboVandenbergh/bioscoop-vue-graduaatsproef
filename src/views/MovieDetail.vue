@@ -346,7 +346,7 @@ export default {
     }
 
     .projector{
-        top: 18.7%;
+        top: 16%;
         width: 370px;
         margin-left: 1078px;
         height: 646px;
